@@ -29,8 +29,8 @@ namespace WebApplication3
                 .AddCookie()
                 .AddGoogle(g =>
                 {
-                    g.ClientId = "55517695374-mchmou24nlcahlhgmnmfl8j7tg39r8kh.apps.googleusercontent.com";
-                    g.ClientSecret = "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";
+                    g.ClientId = "hello";
+                    g.ClientSecret = "world";
                     g.SaveTokens = true;                   
                 });
             var app = builder.Build();
