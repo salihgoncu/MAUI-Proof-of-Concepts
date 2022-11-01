@@ -1,0 +1,44 @@
+﻿namespace MauiApp1
+{
+    public partial class MainPage : ContentPage
+    {
+        int count = 0;
+
+        public MainPage()
+        {
+            InitializeComponent();
+        }
+
+        private void OnCounterClicked(object sender, EventArgs e)
+        {
+            count++;
+
+            if (count == 1)
+                CounterBtn.Text = $"Clicked {count} time";
+            else
+                CounterBtn.Text = $"Clicked {count} times";
+
+            SemanticScreenReader.Announce(CounterBtn.Text);
+        }
+        private async void LoginBtn_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = await WebAuthenticator.Default.AuthenticateAsync(new WebAuthenticatorOptions
+                {
+                    CallbackUrl = new Uri($"{Constants.CallbackScheme}"),
+                    Url = new Uri(Constants.BaseUrl + "Google")
+                });
+
+                string accessToken = result?.AccessToken;
+
+                // Do something with the token
+            }
+            catch (TaskCanceledException ex)
+            {
+                // Use stopped auth
+            }
+        }
+
+    }
+}
